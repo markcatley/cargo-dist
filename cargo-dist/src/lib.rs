@@ -317,7 +317,7 @@ fn build_cargo_target(dist_graph: &DistGraph, target: &CargoBuildStep) -> Result
 
     let mut command = Command::new(&dist_graph.cargo);
     command
-        .arg("build")
+        .arg(target.cargo_build_command())
         .arg("--profile")
         .arg(&target.profile)
         .arg("--message-format=json")

@@ -88,6 +88,11 @@ pub const CPU_ARM64: &str = "arm64";
 /// The key for referring to 32-bit arm as an "cpu"
 pub const CPU_ARM: &str = "arm";
 
+/// The target triple for generating macos universal binaries
+pub const TARGET_TRIPLE_MACOS_UNIVERSAL: &str = "universal2-apple-darwin";
+/// The fragment of a target triple for linux binaries linked against glibc
+pub const TARGET_TRIPLE_FRAGMENT_LINUX_GNU: &str = "-linux-gnu";
+
 /// A rust target-triple (e.g. "x86_64-pc-windows-msvc")
 pub type TargetTriple = String;
 /// A map where the order doesn't matter
@@ -477,6 +482,33 @@ pub struct CargoBuildStep {
     pub rustflags: String,
     /// Binaries we expect from this build
     pub expected_binaries: Vec<BinaryIdx>,
+}
+
+impl CargoBuildStep {
+    /// The cargo command to run for this build step
+    pub fn cargo_build_command(&self) -> &'static str {
+        if self.is_zigbuild() {
+            "zigbuild"
+        } else {
+            "build"
+        }
+    }
+
+    fn is_zigbuild(&self) -> bool {
+        self.is_linux_gnu_with_glibc_version() || self.is_macos_universal()
+    }
+
+    fn is_linux_gnu_with_glibc_version(&self) -> bool {
+        self.target_triple
+            .contains(TARGET_TRIPLE_FRAGMENT_LINUX_GNU)
+            && !self
+                .target_triple
+                .ends_with(TARGET_TRIPLE_FRAGMENT_LINUX_GNU)
+    }
+
+    fn is_macos_universal(&self) -> bool {
+        self.target_triple == TARGET_TRIPLE_MACOS_UNIVERSAL
+    }
 }
 
 /// A cargo build (and copy the outputs to various locations)
