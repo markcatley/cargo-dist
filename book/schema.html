@@ -1,0 +1,517 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>dist-manifest.json - cargo-dist</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="install.html"><strong aria-hidden="true">2.</strong> Install</a></li><li class="chapter-item expanded "><a href="way-too-quickstart.html"><strong aria-hidden="true">3.</strong> Way Too Quick Start</a></li><li class="chapter-item expanded "><a href="guide.html"><strong aria-hidden="true">4.</strong> Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="simple-guide.html"><strong aria-hidden="true">4.1.</strong> A Simple Application</a></li><li class="chapter-item expanded "><a href="workspace-guide.html"><strong aria-hidden="true">4.2.</strong> More Complex Workspaces</a></li><li class="chapter-item expanded "><a href="cargo-release-guide.html"><strong aria-hidden="true">4.3.</strong> Using cargo-release</a></li></ol></li><li class="chapter-item expanded "><a href="reference.html"><strong aria-hidden="true">5.</strong> Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="concepts.html"><strong aria-hidden="true">5.1.</strong> Concepts</a></li><li class="chapter-item expanded "><a href="config.html"><strong aria-hidden="true">5.2.</strong> Config</a></li><li class="chapter-item expanded "><a href="artifacts.html"><strong aria-hidden="true">5.3.</strong> Artifacts</a></li><li class="chapter-item expanded "><a href="installers.html"><strong aria-hidden="true">5.4.</strong> Installers</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">5.5.</strong> CLI Manual</a></li><li class="chapter-item expanded "><a href="schema.html" class="active"><strong aria-hidden="true">5.6.</strong> dist-manifest.json</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                    </div>
+
+                    <h1 class="menu-title">cargo-dist</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/axodotdev/cargo-dist" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/axodotdev/cargo-dist/edit/main/book/src/schema.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="json-schema"><a class="header" href="#json-schema">JSON Schema</a></h1>
+<p>Many cargo-dist commands when run with <code>--output-format=json</code> will output to stdout a format we call &quot;dist-manifest.json&quot;. This contains:</p>
+<ul>
+<li>Top-level facts about the Announcement (tag, announcement title, etc)</li>
+<li>Info about the Apps being Released as part of the Announcement (&quot;releases&quot;)</li>
+<li>Info about the Artifacts included in the Announcement (&quot;announcements&quot;)</li>
+</ul>
+<p>As a matter of forward-compat and back-compat, basically every field in the format should be treated as optional (which the schema reflects).</p>
+<p>Here is the JSON Schema which will <em>hopefully</em> be stable going forward.</p>
+<pre><code class="language-json">{
+  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,
+  &quot;title&quot;: &quot;DistManifest&quot;,
+  &quot;description&quot;: &quot;A report of the releases and artifacts that cargo-dist generated&quot;,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;announcement_changelog&quot;: {
+      &quot;description&quot;: &quot;A changelog for the announcement&quot;,
+      &quot;type&quot;: [
+        &quot;string&quot;,
+        &quot;null&quot;
+      ]
+    },
+    &quot;announcement_github_body&quot;: {
+      &quot;description&quot;: &quot;A Github Releases body for the announcement&quot;,
+      &quot;type&quot;: [
+        &quot;string&quot;,
+        &quot;null&quot;
+      ]
+    },
+    &quot;announcement_is_prerelease&quot;: {
+      &quot;description&quot;: &quot;Whether this announcement appears to be a prerelease&quot;,
+      &quot;default&quot;: false,
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;announcement_tag&quot;: {
+      &quot;description&quot;: &quot;The (git) tag associated with this announcement&quot;,
+      &quot;type&quot;: [
+        &quot;string&quot;,
+        &quot;null&quot;
+      ]
+    },
+    &quot;announcement_title&quot;: {
+      &quot;description&quot;: &quot;A title for the announcement&quot;,
+      &quot;type&quot;: [
+        &quot;string&quot;,
+        &quot;null&quot;
+      ]
+    },
+    &quot;artifacts&quot;: {
+      &quot;description&quot;: &quot;The artifacts included in this Announcement, referenced by releases.&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;additionalProperties&quot;: {
+        &quot;$ref&quot;: &quot;#/definitions/Artifact&quot;
+      }
+    },
+    &quot;dist_version&quot;: {
+      &quot;description&quot;: &quot;The version of cargo-dist that generated this&quot;,
+      &quot;type&quot;: [
+        &quot;string&quot;,
+        &quot;null&quot;
+      ]
+    },
+    &quot;releases&quot;: {
+      &quot;description&quot;: &quot;App releases we're distributing&quot;,
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;$ref&quot;: &quot;#/definitions/Release&quot;
+      }
+    }
+  },
+  &quot;definitions&quot;: {
+    &quot;Artifact&quot;: {
+      &quot;description&quot;: &quot;A distributable artifact that's part of a Release\n\ni.e. a zip or installer&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;oneOf&quot;: [
+        {
+          &quot;description&quot;: &quot;A zip or a tarball&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;required&quot;: [
+            &quot;kind&quot;
+          ],
+          &quot;properties&quot;: {
+            &quot;kind&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;enum&quot;: [
+                &quot;executable-zip&quot;
+              ]
+            }
+          }
+        },
+        {
+          &quot;description&quot;: &quot;Standalone Symbols/Debuginfo for a build&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;required&quot;: [
+            &quot;kind&quot;
+          ],
+          &quot;properties&quot;: {
+            &quot;kind&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;enum&quot;: [
+                &quot;symbols&quot;
+              ]
+            }
+          }
+        },
+        {
+          &quot;description&quot;: &quot;Installer&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;required&quot;: [
+            &quot;kind&quot;
+          ],
+          &quot;properties&quot;: {
+            &quot;kind&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;enum&quot;: [
+                &quot;installer&quot;
+              ]
+            }
+          }
+        },
+        {
+          &quot;description&quot;: &quot;A checksum of another artifact&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;required&quot;: [
+            &quot;kind&quot;
+          ],
+          &quot;properties&quot;: {
+            &quot;kind&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;enum&quot;: [
+                &quot;checksum&quot;
+              ]
+            }
+          }
+        },
+        {
+          &quot;description&quot;: &quot;Unknown to this version of cargo-dist-schema\n\nThis is a fallback for forward/backward-compat&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;required&quot;: [
+            &quot;kind&quot;
+          ],
+          &quot;properties&quot;: {
+            &quot;kind&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;enum&quot;: [
+                &quot;unknown&quot;
+              ]
+            }
+          }
+        }
+      ],
+      &quot;properties&quot;: {
+        &quot;assets&quot;: {
+          &quot;description&quot;: &quot;Assets included in the bundle (like executables and READMEs)&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/Asset&quot;
+          }
+        },
+        &quot;checksum&quot;: {
+          &quot;description&quot;: &quot;id of an that contains the checksum for this artifact&quot;,
+          &quot;type&quot;: [
+            &quot;string&quot;,
+            &quot;null&quot;
+          ]
+        },
+        &quot;description&quot;: {
+          &quot;description&quot;: &quot;A brief description of what this artifact is&quot;,
+          &quot;type&quot;: [
+            &quot;string&quot;,
+            &quot;null&quot;
+          ]
+        },
+        &quot;install_hint&quot;: {
+          &quot;description&quot;: &quot;A string describing how to install this&quot;,
+          &quot;type&quot;: [
+            &quot;string&quot;,
+            &quot;null&quot;
+          ]
+        },
+        &quot;name&quot;: {
+          &quot;description&quot;: &quot;The unique name of the artifact (e.g. `myapp-v1.0.0-x86_64-pc-windows-msvc.zip`)\n\nIf this is missing then that indicates the artifact is purely informative and has no physical files associated with it. This may be used (in the future) to e.g. indicate you can install the application with `cargo install` or `npm install`.&quot;,
+          &quot;type&quot;: [
+            &quot;string&quot;,
+            &quot;null&quot;
+          ]
+        },
+        &quot;path&quot;: {
+          &quot;description&quot;: &quot;The location of the artifact on the local system&quot;,
+          &quot;type&quot;: [
+            &quot;string&quot;,
+            &quot;null&quot;
+          ]
+        },
+        &quot;target_triples&quot;: {
+          &quot;description&quot;: &quot;The target triple of the bundle&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;string&quot;
+          }
+        }
+      }
+    },
+    &quot;Asset&quot;: {
+      &quot;description&quot;: &quot;An asset contained in an artifact (executable, license, etc.)&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;oneOf&quot;: [
+        {
+          &quot;description&quot;: &quot;An executable artifact&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;required&quot;: [
+            &quot;kind&quot;
+          ],
+          &quot;properties&quot;: {
+            &quot;kind&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;enum&quot;: [
+                &quot;executable&quot;
+              ]
+            },
+            &quot;symbols_artifact&quot;: {
+              &quot;description&quot;: &quot;The name of the Artifact containing symbols for this executable&quot;,
+              &quot;type&quot;: [
+                &quot;string&quot;,
+                &quot;null&quot;
+              ]
+            }
+          }
+        },
+        {
+          &quot;description&quot;: &quot;A README file&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;required&quot;: [
+            &quot;kind&quot;
+          ],
+          &quot;properties&quot;: {
+            &quot;kind&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;enum&quot;: [
+                &quot;readme&quot;
+              ]
+            }
+          }
+        },
+        {
+          &quot;description&quot;: &quot;A LICENSE file&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;required&quot;: [
+            &quot;kind&quot;
+          ],
+          &quot;properties&quot;: {
+            &quot;kind&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;enum&quot;: [
+                &quot;license&quot;
+              ]
+            }
+          }
+        },
+        {
+          &quot;description&quot;: &quot;A CHANGELOG or RELEASES file&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;required&quot;: [
+            &quot;kind&quot;
+          ],
+          &quot;properties&quot;: {
+            &quot;kind&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;enum&quot;: [
+                &quot;changelog&quot;
+              ]
+            }
+          }
+        },
+        {
+          &quot;description&quot;: &quot;Unknown to this version of cargo-dist-schema\n\nThis is a fallback for forward/backward-compat&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;required&quot;: [
+            &quot;kind&quot;
+          ],
+          &quot;properties&quot;: {
+            &quot;kind&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;enum&quot;: [
+                &quot;unknown&quot;
+              ]
+            }
+          }
+        }
+      ],
+      &quot;properties&quot;: {
+        &quot;name&quot;: {
+          &quot;description&quot;: &quot;The high-level name of the asset&quot;,
+          &quot;type&quot;: [
+            &quot;string&quot;,
+            &quot;null&quot;
+          ]
+        },
+        &quot;path&quot;: {
+          &quot;description&quot;: &quot;The path of the asset relative to the root of the artifact&quot;,
+          &quot;type&quot;: [
+            &quot;string&quot;,
+            &quot;null&quot;
+          ]
+        }
+      }
+    },
+    &quot;Release&quot;: {
+      &quot;description&quot;: &quot;A Release of an Application&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;app_name&quot;,
+        &quot;app_version&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;app_name&quot;: {
+          &quot;description&quot;: &quot;The name of the app&quot;,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;app_version&quot;: {
+          &quot;description&quot;: &quot;The version of the app&quot;,
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;artifacts&quot;: {
+          &quot;description&quot;: &quot;The artifacts for this release (zips, debuginfo, metadata...)&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;string&quot;
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="cli.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="cli.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
